@@ -1,16 +1,214 @@
-html,
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    --s: 25vmin;
+    --p: calc(var(--s) / 2);
+    --c1: pink;
+    --c2: dodgerblue;
+    --c3: white;
+    --bg: var(--c3);
+    --d: 4000ms;
+    --e: cubic-bezier(0.76, 0, 0.24, 1);
+
+    background-color: var(--bg);
+    background-image:
+        linear-gradient(45deg, var(--c1) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--c1) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--c2) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--c2) 75%);
+    background-size: var(--s) var(--s);
+    background-position:
+        calc(var(--p) * 1) calc(var(--p) * 0),
+        calc(var(--p) * -1) calc(var(--p) * 1),
+        calc(var(--p) * 1) calc(var(--p) * -1),
+        calc(var(--p) * -1) calc(var(--p) * 0);
+    animation:
+        color var(--d) var(--e) infinite,
+        position var(--d) var(--e) infinite;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+@keyframes color {
+
+    0%,
+    25% {
+        --bg: var(--c3);
+    }
+
+    26%,
+    50% {
+        --bg: var(--c1);
+    }
+
+    51%,
+    75% {
+        --bg: var(--c3);
+    }
+
+    76%,
+    100% {
+        --bg: var(--c2);
+    }
 }
+
+@keyframes position {
+    0% {
+        background-position:
+            calc(var(--p) * 1) calc(var(--p) * 0),
+            calc(var(--p) * -1) calc(var(--p) * 1),
+            calc(var(--p) * 1) calc(var(--p) * -1),
+            calc(var(--p) * -1) calc(var(--p) * 0);
+    }
+
+    25% {
+        background-position:
+            calc(var(--p) * 1) calc(var(--p) * 4),
+            calc(var(--p) * -1) calc(var(--p) * 5),
+            calc(var(--p) * 1) calc(var(--p) * 3),
+            calc(var(--p) * -1) calc(var(--p) * 4);
+    }
+
+    50% {
+        background-position:
+            calc(var(--p) * 3) calc(var(--p) * 8),
+            calc(var(--p) * -3) calc(var(--p) * 9),
+            calc(var(--p) * 2) calc(var(--p) * 7),
+            calc(var(--p) * -2) calc(var(--p) * 8);
+    }
+
+    75% {
+        background-position:
+            calc(var(--p) * 3) calc(var(--p) * 12),
+            calc(var(--p) * -3) calc(var(--p) * 13),
+            calc(var(--p) * 2) calc(var(--p) * 11),
+            calc(var(--p) * -2) calc(var(--p) * 12);
+    }
+
+    100% {
+        background-position:
+            calc(var(--p) * 5) calc(var(--p) * 16),
+            calc(var(--p) * -5) calc(var(--p) * 17),
+            calc(var(--p) * 5) calc(var(--p) * 15),
+            calc(var(--p) * -5) calc(var(--p) * 16);
+    }
+}
+
+@media (prefers-reduced-motion) {
+    body {
+        animation: none;
+    }
+} */
+
 
 * {
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box !important;
+}
+
+
+html,
+body {
+
+    height: 100%;
+}
+
+body {
+    display: table;
+    width: 100%;
+    height: 100%;
+    background-color: #171717;
+    color: #000;
+    line-height: 1.6;
+    position: relative;
+    font-family: sans-serif;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    margin: auto;
+    width: 90vw;
+}
+
+.line {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.line::after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 15vh;
+    width: 100%;
+    top: -50%;
+    left: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+    -webkit-animation: drop 7s 0s infinite;
+    animation: drop 7s 0s infinite;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+    animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+}
+
+.line:nth-child(1) {
+    margin-left: -25%;
+}
+
+.line:nth-child(1)::after {
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s;
+}
+
+.line:nth-child(3) {
+    margin-left: 25%;
+}
+
+.line:nth-child(3)::after {
+    -webkit-animation-delay: 2.5s;
+    animation-delay: 2.5s;
+}
+
+@-webkit-keyframes drop {
+    0% {
+        top: -50%;
+    }
+
+    100% {
+        top: 110%;
+    }
+}
+
+@keyframes drop {
+    0% {
+        top: -50%;
+    }
+
+    100% {
+        top: 110%;
+    }
+}
+
+
+.for-scrolbar {
+    margin-top: 220px;
+}
+
+.container::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
